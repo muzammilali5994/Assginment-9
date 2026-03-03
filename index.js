@@ -122,6 +122,9 @@ const auth = getAuth(app);
         name: dname.value,
         age: dage.value
       });
+       did.value = "";
+      dname.value = "";
+      dage.value = "";
       console.log("Data updated");
       
     }
