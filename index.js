@@ -92,23 +92,6 @@ const auth = getAuth(app);
     });
   }
 
-  // get data 
-
-  const getDataBtn = document.getElementById("getDataBtn");
-  getDataBtn.addEventListener("click", getData);
-  
-  async function getData() {
-
-    const refData = doc(db, "users", did.value);
-    const docSnap = await getDoc(refData);
-
-    if(docSnap.exists()){
-      dname.value = docSnap.data().name;
-      dage.value = docSnap.data().age;
-      
-    }
-
-  }
 
 
   // update data
@@ -158,7 +141,7 @@ const tableBody = document.getElementById("tableBody");
 
 const colRef = collection(db, "users");
 onSnapshot(colRef,(x)=>{
-  let tableData = "";
+  tableBody.innerHTML = "";
   x.forEach((dbData)=>{
 
     tableBody.innerHTML += `
