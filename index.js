@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
   
   import { getFirestore, doc, setDoc,   collection, updateDoc , getDoc, deleteDoc , onSnapshot } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
-  import { getAuth,createUserWithEmailAndPassword ,onAuthStateChanged ,signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
   
 
   
@@ -23,49 +23,49 @@ const auth = getAuth(app);
 
 //Sign Up 
 
-  const signUpEmail = document.getElementById("semail");
-  const signUpPassword = document.getElementById("spassword");
-  const signUpButton = document.querySelector("button");
+//   const signUpEmail = document.getElementById("semail");
+//   const signUpPassword = document.getElementById("spassword");
+//   const signUpButton = document.querySelector("button");
 
-  signUpButton.addEventListener("click", signup);
+//   signUpButton.addEventListener("click", signup);
 
-  function signup() {
-      createUserWithEmailAndPassword(auth, signUpEmail.value, signUpPassword.value)
-    .then((userCredential) => {
-      // Signed up 
-      const user = userCredential.user;
-      console.log(user);
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
-    });
-  }
-
-
-// Sign In
-
-  const signin = document.getElementById("signin");
-  const email = document.getElementById("Iemail");
-  const password = document.getElementById("Ipassword");
-  signin.addEventListener("click", signinf);
+//   function signup() {
+//       createUserWithEmailAndPassword(auth, signUpEmail.value, signUpPassword.value)
+//     .then((userCredential) => {
+//       // Signed up 
+//       const user = userCredential.user;
+//       console.log(user);
+//       // ...
+//     })
+//     .catch((error) => {
+//       const errorCode = error.code;
+//       const errorMessage = error.message;
+//       // ..
+//     });
+//   }
 
 
-  function signinf() {
-    signInWithEmailAndPassword(auth, email.value, password.value )
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log(user);
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
+// // Sign In
+
+//   const signin = document.getElementById("signin");
+//   const email = document.getElementById("Iemail");
+//   const password = document.getElementById("Ipassword");
+//   signin.addEventListener("click", signinf);
+
+
+//   function signinf() {
+//     signInWithEmailAndPassword(auth, email.value, password.value )
+//   .then((userCredential) => {
+//     // Signed in 
+//     const user = userCredential.user;
+//     console.log(user);
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//   });
   
-  }
+//   }
 
   // add data
   const did = document.getElementById("did");
@@ -84,8 +84,7 @@ const auth = getAuth(app);
       did.value = "";
       dname.value = "";
       dage.value = "";
-      location.reload();
-
+     
     })
     .catch((error) => {
       console.log(error);
@@ -93,6 +92,23 @@ const auth = getAuth(app);
     });
   }
 
+// get data 
+
+  const getDataBtn = document.getElementById("getDataBtn");
+  getDataBtn.addEventListener("click", getData);
+  
+  async function getData() {
+
+    const refData = doc(db, "users", did.value);
+    const docSnap = await getDoc(refData);
+
+    if(docSnap.exists()){
+      dname.value = docSnap.data().name;
+      dage.value = docSnap.data().age;
+      
+    }
+
+  }
 
 
   // update data
@@ -107,7 +123,7 @@ const auth = getAuth(app);
         age: dage.value
       });
       console.log("Data updated");
-      location.reload();
+      
     }
     catch(error){
       console.log(error);
@@ -127,7 +143,7 @@ const auth = getAuth(app);
       did.value = "";
       dname.value = "";
       dage.value = "";
-        location.reload();
+       
       console.log("Data deleted");
 
     }
@@ -142,8 +158,9 @@ const auth = getAuth(app);
 const tableBody = document.getElementById("tableBody");
 
 const colRef = collection(db, "users");
-onSnapshot(colRef,(x)=>{
+  onSnapshot(colRef,(x)=>{
   tableBody.innerHTML = "";
+
   x.forEach((dbData)=>{
 
     tableBody.innerHTML += `
