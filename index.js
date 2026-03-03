@@ -84,6 +84,7 @@ const auth = getAuth(app);
       did.value = "";
       dname.value = "";
       dage.value = "";
+      location.reload();
 
     })
     .catch((error) => {
@@ -106,6 +107,7 @@ const auth = getAuth(app);
         age: dage.value
       });
       console.log("Data updated");
+      location.reload();
     }
     catch(error){
       console.log(error);
@@ -125,7 +127,7 @@ const auth = getAuth(app);
       did.value = "";
       dname.value = "";
       dage.value = "";
-
+        location.reload();
       console.log("Data deleted");
 
     }
