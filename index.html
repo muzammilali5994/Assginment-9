@@ -6,7 +6,48 @@
     <title>Assignment 9</title>
 </head>
 <body>
+    <h2>Sign Up</h2>
+    <input type="email" name="email" id="semail">
+    <input type="password" name="password" id="spassword">
+
+    <button>Sign Up</button>
+
+
+        <h2>Sign IN</h2>
+    <input type="email" name="email" id="Iemail">
+    <input type="password" name="password" id="Ipassword">
+
+    <button id="signin">Sign In</button>
+    <br>
     
+
+
+    <h2>Add Data</h2>
+    <button id="getDataBtn">Find data with id</button>
+    <input type="text" name="id" id="did">
+    <input type="text" name="name" id="dname">
+    <input type="text" name="age" id="dage">
+    <button id="addDataButton">Add Data</button>
+    <button id="updateData">Update Data</button>
+    <br>
+    <button id="getData">Get Data</button>
+    <button id="deletBtn">Delete Data</button>
+
+    <br>
+
+    <table border="1">
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+
+
 
     <script type="module" src="index.js"></script>
 </body>
